@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -31,7 +29,7 @@ namespace FACTURACION
 
         public class ExcelProcessor
         {
-            public void ProcessExcelFile(string filePath)
+            public void ProcessExcel(string filePath)
             {
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(filePath);
@@ -83,50 +81,17 @@ namespace FACTURACION
             }
             private void CreateAccountingEntry(string accountCode, string accountDescription, decimal debitAmount, decimal creditAmount)
             {
-                public List<Asiento> Asientos { get; set; }
 
-            public SistemaContable()
-            {
-                Asientos = new List<Asiento>();
+
             }
 
-            public bool CrearAsientoDesdeExcel(string rutaArchivo)
+            public class Asiento
             {
-                if (!ValidarFormato(rutaArchivo))
-                {
-                    return false;
-                }
-
-                using (var paquete = new ExcelPackage(new FileInfo(rutaArchivo)))
-                {
-                    var hoja = paquete.Workbook.Worksheets[0];
-                    var asiento = new Asiento
-                    {
-                        // Aquí debes ajustar los índices de las celdas según tu archivo Excel
-                        Propiedad1 = hoja.Cells[1, 1].Value.ToString(),
-                        Propiedad2 = hoja.Cells[1, 2].Value.ToString(),
-                        // Agrega todas las propiedades necesarias
-                    };
-
-                    Asientos.Add(asiento);
-                }
-
-                return true;
-            }
-
-            public bool ValidarFormato(string rutaArchivo)
-            {
-                // Aquí debes implementar la lógica para validar el formato del archivo Excel
-                throw new NotImplementedException();
+                public string Propiedad1 { get; set; }
+                public string Propiedad2 { get; set; }
+                // Agrega todas las propiedades necesarias
             }
         }
 
-        public class Asiento
-        {
-            public string Propiedad1 { get; set; }
-            public string Propiedad2 { get; set; }
-            // Agrega todas las propiedades necesarias
-        }
-    }
     }
 }
